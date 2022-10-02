@@ -49,6 +49,7 @@ closecart.onclick = () =>
     {
         var buttonclicked = event.target ;
         buttonclicked.parentElement.remove();
+        updatetotal();
     }
 
 
@@ -61,4 +62,25 @@ closecart.onclick = () =>
         {
             input.value = 1;
         }
+        updatetotal();
+     }
+
+     function updatetotal()
+     {
+        var cartcontent = document.getElementsByClassName("cart-content")[0];
+        var cartboxes = cartcontent.getElementsByClassName("cart-box");
+        var total = 0;
+
+        for(var i = 0;i<cartboxes.length;i++)
+        {
+            var cartbox = cartboxes[i];
+            var priceElement = cartbox.getElementsByClassName("cart-price")[0];
+            var quantityelement =  cartbox.getElementsByClassName("cart-quantity")[0];
+            var price  = parseFloat(priceElement.innerText.replace("$",""));
+            var quantity = quantityelement.value;
+            total = total + price * quantity;
+
+            document.getElementsByClassName("total-price")[0].innerText = "$" + total ;
+        }
+
      }
