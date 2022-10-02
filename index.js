@@ -41,6 +41,15 @@ closecart.onclick = () =>
             input.addEventListener('change',quantitychanged)   
          }
 
+        //  Add to Cart 
+
+         var addcart = document.getElementsByClassName("add-cart");
+         for(var i=0;i<addcart.length;i++)
+         {
+            var button = addcart[i];
+            button.addEventListener('click',addcartclicked)
+         }
+
      }
 
     //   function Remove items for cart (here select the parent or whole item)
@@ -64,6 +73,21 @@ closecart.onclick = () =>
         }
         updatetotal();
      }
+
+    //  addto cart
+
+     function addcartclicked(event)
+     {
+        var buttonclick =  event.target;
+        var shoprod = buttonclick.parentElement;
+        var title = shoprod.getElementsByClassName('product-title')[0].innerText;
+        var price = shoprod.getElementsByClassName('price')[0].innerText;
+        var prodimg = shoprod.getElementsByClassName('product-img')[0].src;
+
+        console.log(title,price,prodimg);
+
+     }
+
 
      function updatetotal()
      {
