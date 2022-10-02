@@ -22,6 +22,7 @@ closecart.onclick = () =>
      {
         ready();
      }
+     
      function ready()
      {
         // Remove items from cart here select the Button
@@ -84,10 +85,47 @@ closecart.onclick = () =>
         var price = shoprod.getElementsByClassName('price')[0].innerText;
         var prodimg = shoprod.getElementsByClassName('product-img')[0].src;
 
-        console.log(title,price,prodimg);
+            addproductocart(title,price,prodimg);
+            updatetotal();
 
      }
 
+      function addproductocart(title,price,prodimg)
+      {
+        var cartshopbox = document.createElement('div');
+        cartshopbox.classList.add('cart-box');
+        var  cartitems = document.getElementsByClassName("cart-content")[0];
+        var cartitemsname = cartitems.getElementsByClassName('cart-product-title');
+
+        for(var  i=0;i<cartitemsname.length;i++)
+        {
+             if(cartitemsname[i].innerText == title)
+             {
+                alert('You have already added this item to the Cart ');
+                return;
+             }
+        }
+
+             var cartboxcontent = `
+               <img src = "img/product2.jpg"  alt = "" class = "cart-img" />    
+                <div class = "detail-box"> 
+                        <div class = "cart-product-title">  Earbuds  </div>
+                       <div class = "cart-price"> $25 </div>
+                        <input type = "number" value = "1" class = "cart-quantity">
+                </div>
+
+                <i class = "bx bx-trash-alt cart-remove"></i> `;
+
+
+      cartshopbox.innerHTML =   cartboxcontent;
+      cartitems.append(cartshopbox)
+      cartshopbox.getElementsByClassName('cart-remove')[0].addEventListener('click',removecartitem);
+      cartshopbox.getElementsByClassName('cart-quantity')[0].addEventListener('change',quantitychanged);
+
+      }
+
+
+ 
 
      function updatetotal()
      {
